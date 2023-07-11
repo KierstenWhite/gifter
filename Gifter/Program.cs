@@ -18,6 +18,7 @@ namespace Gifter
             builder.Services.AddCors();
 
             builder.Services.AddTransient<IPostRepository, PostRepository>();
+            builder.Services.AddTransient<IUserProfileRepository, UserProfileRepository>();
 
             var app = builder.Build();
 
