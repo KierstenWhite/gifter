@@ -375,6 +375,7 @@ namespace Gifter.Repositories
             }
         }
 
+        //Add a new endpoint, /api/post/hottest?since=<SOME_DATE> that will return posts created on or after the provided date.
         public List<Post> Hottest(DateTime criterion, bool sortDescending)
         {
             using (var conn = Connection)

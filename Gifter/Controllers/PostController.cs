@@ -82,6 +82,7 @@ namespace Gifter.Controllers
             return Ok(_postRepository.Search(q, sortDesc));
         }
 
+        //Add a new endpoint, /api/post/hottest?since=<SOME_DATE> that will return posts created on or after the provided date.
         [HttpGet("hottest")]
         public IActionResult Hottest(DateTime since, bool sortDesc)
         {
