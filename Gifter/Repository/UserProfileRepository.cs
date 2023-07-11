@@ -83,6 +83,71 @@ namespace Gifter.Repositories
             }
         }
 
+        public UserProfile GetByIdWithAuthoredPosts(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                          SELECT up.Id AS UserProfileId, up.[Name], up.Email, up.Bio, up.DateCreated AS UserProfileDateCreated,
+                       up.ImageUrl AS UserProfileImageUrl,
+
+                       p.Id AS PostId, p.Title, p.ImageUrl AS PostImageUrl, p.Caption, p.DateCreated AS PostDateCreated,
+                       p.UserProfileId AS PostUserProfileId
+
+                  FROM UserProfile up
+                       LEFT JOIN Post p ON p.UserProfileId = up.id
+                       WHERE up.Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+
+                    var reader = cmd.ExecuteReader();
+
+                    UserProfile profile = null;
+                    while (reader.Read())
+                    {
+                        if (profile == null)
+                        {
+                            profile = new UserProfile()
+                            {
+                                Id = id,
+                                Name = DbUtils.GetString(reader, "Name"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
+                                Bio = DbUtils.GetString(reader, "Bio"),
+                                DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
+                                Posts = new List<Post>()
+                            };
+                        }
+
+                        var postId = DbUtils.GetInt(reader, "PostId");
+                        var existingPost = profile.Posts.FirstOrDefault(p => p.Id == postId);
+
+                        if (existingPost == null)
+                        {
+                            existingPost = new Post()
+                            {
+                                Id = DbUtils.GetInt(reader, "PostId"),
+                                Title = DbUtils.GetString(reader, "Title"),
+                                Caption = DbUtils.GetString(reader, "Caption"),
+                                DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated"),
+                                ImageUrl = DbUtils.GetString(reader, "PostImageUrl"),
+                                UserProfileId = DbUtils.GetInt(reader, "PostUserProfileId"),
+                            };
+                            profile.Posts.Add(existingPost);
+                        }
+
+                    }
+
+                    reader.Close();
+
+                    return profile;
+                }
+            }
+        }
+
         public void Add(UserProfile profile)
         {
             using (var conn = Connection)
