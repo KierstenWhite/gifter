@@ -45,8 +45,8 @@ export const PostForm = () => {
             <h2 className="postForm__title">Add a New Post</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="description" className="form-control">Description</label>
-                    <input required autoFocus type="text" className="form-control" id="description" value={post.title} 
+                    <label htmlFor="title" className="form-control">Title</label>
+                    <input required autoFocus type="text" className="form-control" id="title" value={post.title} 
                             onChange={
                             (evt) => {
                                 const copy = {...post} // copying ticket object
