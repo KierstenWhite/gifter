@@ -34,11 +34,11 @@ export const PostForm = () => {
     }
 
     //This is DRY coding (I think) rather than doing this on each input below - wish I would have known this the first capstone
-    // const saveNewPost = (evt) => {
-    //     const copy = {...post}
-    //     copy[evt.target.id] = evt.target.value
-    //     setPost(copy)
-    //}
+    const saveNewPost = (evt) => {
+        const copy = {...post}
+        copy[evt.target.id] = evt.target.value
+        setPost(copy)
+    }
 
     return (
         <form className="newPostForm">
@@ -47,36 +47,39 @@ export const PostForm = () => {
                 <div className="form-group">
                     <label htmlFor="title" className="form-control">Title</label>
                     <input required autoFocus type="text" className="form-control" id="title" value={post.title} 
-                            onChange={
-                            (evt) => {
-                                const copy = {...post} // copying ticket object
-                                copy.title = evt.target.value //evt.target.value is whatever is currently in the input field
-                                setPost(copy)
-                             }} />
+                            onChange={saveNewPost
+                            // (evt) => {
+                            //     const copy = {...post} // copying ticket object
+                            //     copy.title = evt.target.value //evt.target.value is whatever is currently in the input field
+                            //     setPost(copy)
+                            //  }
+                        } />
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="imageUrl" className="form-control">Image URL</label>
                     <input required autoFocus type="text" className="form-control" id="imageUrl" value={post.imageUrl}
-                    onChange={
-                        (evt) => {
-                            const copy = {...post} // copying ticket object
-                            copy.imageUrl = evt.target.value //evt.target.value is whatever is currently in the input field
-                            setPost(copy)
-                         }} />
+                    onChange={saveNewPost
+                        // (evt) => {
+                        //     const copy = {...post} // copying ticket object
+                        //     copy.imageUrl = evt.target.value //evt.target.value is whatever is currently in the input field
+                        //     setPost(copy)
+                        //  }
+                         } />
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="caption" className="form-control">Caption</label>
                     <input required autoFocus type="text" className="form-control" id="caption" value={post.caption}
-                    onChange={
-                        (evt) => {
-                            const copy = {...post} // copying ticket object
-                            copy.caption = evt.target.value //evt.target.value is whatever is currently in the input field
-                            setPost(copy)
-                         }} />
+                    onChange={saveNewPost
+                        // (evt) => {
+                        //     const copy = {...post} // copying ticket object
+                        //     copy.caption = evt.target.value //evt.target.value is whatever is currently in the input field
+                        //     setPost(copy)
+                        //  }
+                    } />
                 </div>
             </fieldset>
             
@@ -89,20 +92,3 @@ export const PostForm = () => {
         </form>
     )
 }
-
-/* <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        placeholder="Description"
-                        value={post.description}
-                        onChange={
-                            (evt) => {
-                                const copy = {...post} // copying ticket object
-                                copy.description = evt.target.value //evt.target.value is whatever is currently in the input field
-                                setPost(copy)
-                            }
-                        } />
-                </div> */

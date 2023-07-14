@@ -16,3 +16,9 @@ export const addPost = (singlePost) => {
     body: JSON.stringify(singlePost),
   });
 };
+
+//Add a "Search Posts" feature to your app that uses the /api/post/search API endpoint.
+export const SearchPosts = (query) => { //http GET by Search `/api/Post/search?q=<query>`
+  return fetch(`${baseUrl}/search?q=${query}`)
+  .then((r) => r.json())
+}
