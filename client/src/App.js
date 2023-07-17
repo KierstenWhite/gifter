@@ -4,7 +4,6 @@ import "./App.css";
 import ApplicationViews from "./components/ApplicationViews";
 import Header from "./components/Header";
 
-
 function App() {
   return (
     <div className="App">
