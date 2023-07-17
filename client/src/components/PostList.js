@@ -1,31 +1,46 @@
 import React, { useState, useEffect } from "react";
-import { getAllPosts } from "../APIManagers/PostManager";
+import Post from './Post';
+import { getAllPosts, SearchPosts } from "../APIManagers/PostManager";
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
+  const [query, setQuery] = useState("");
 
   const getPosts = () => {
-    getAllPosts().then(allPosts => setPosts(allPosts)); 
+    getAllPosts().then(allPosts => setPosts(allPosts)); //using fetch call getAllPosts()
   };
+
+  const searchAllPosts = (e) => { 
+    e.preventDefault()  //necessary because using a form element, not necessary if using <section>  
+    SearchPosts(query).then(post => setPosts(post));
+  };
+
+  
+
 
   useEffect(() => {
     getPosts();
-  }, []); 
+  }, []); //empty array [] means it will run once when page loads
 
-
-
-  return (  
-    <div>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <img src={post.imageUrl} alt={post.title} />
-          <p>
-            <strong>{post.title}</strong>
-          </p>
-          <p>{post.caption}</p>
+  return (<>
+    
+    <h2 className="welcome">Search Posts</h2>
+      <form className="row g-3" >
+        <div>
+          <input className="form-control" property="search" onChange={e => setQuery(e.target.value)} placeholder="Enter Key Word"/>
         </div>
-      ))}
+        <button onClick={searchAllPosts}  className="btn btn-primary">Submit</button>
+      </form>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="cards-column">
+          {posts.map((post) => (
+            <Post key={post.id} post={post} />  //using key and prop
+          ))}
+        </div>
+      </div>
     </div>
+    </>
   );
 };
 

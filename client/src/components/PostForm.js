@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { addPost } from "../APIManagers/PostManager"
 
-export const PostForm = () => {
+const PostForm = () => {
     /*
         TODO: Add the correct default properties to the
         initial state object
@@ -33,7 +33,7 @@ export const PostForm = () => {
          .then(() => {navigate("/")});
     }
 
-    //This is DRY coding (I think) rather than doing this on each input below - wish I would have known this the first capstone
+    //This is DRY coding  rather than doing this on each input below
     const saveNewPost = (evt) => {
         const copy = {...post}
         copy[evt.target.id] = evt.target.value
@@ -92,3 +92,5 @@ export const PostForm = () => {
         </form>
     )
 }
+
+export default PostForm;

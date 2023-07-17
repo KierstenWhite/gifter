@@ -3,11 +3,11 @@ import React from "react";
 const baseUrl = '/api/post';
 
 export const getAllPosts = () => {
-  return fetch(baseUrl) 
+  return fetch(`${baseUrl}/GetWithComments`) //http GET request or  `/api/post/GetWithComments`
     .then((res) => res.json())
 };
 
-export const addPost = (singlePost) => { 
+export const addPost = (singlePost) => { //http POST request
   return fetch(baseUrl, {
     method: "POST",
     headers: {
@@ -17,8 +17,12 @@ export const addPost = (singlePost) => {
   });
 };
 
-//Add a "Search Posts" feature to your app that uses the /api/post/search API endpoint.
-export const SearchPosts = (query) => { //http GET by Search `/api/Post/search?q=<query>`
+export const SearchPosts = (query)=> { //http GET by Search `/api/Post/search?q=<query>`
   return fetch(`${baseUrl}/search?q=${query}`)
-  .then((r) => r.json())
-}
+  .then((res)=> res.json())
+};
+
+
+export const getPost = (id) => {  //http GET by id parameter 
+  return fetch(`/api/post/GetWithComments/${id}`).then((res) => res.json());
+};

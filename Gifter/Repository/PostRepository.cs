@@ -103,7 +103,6 @@ namespace Gifter.Repositories
                                     Id = DbUtils.GetInt(reader, "PostUserProfileId"),
                                     Name = DbUtils.GetString(reader, "Name"),
                                     Email = DbUtils.GetString(reader, "Email"),
-                                    Bio = DbUtils.GetString(reader, "Bio"),
                                     DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
                                     ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
                                 },

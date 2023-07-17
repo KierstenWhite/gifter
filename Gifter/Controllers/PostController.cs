@@ -66,7 +66,7 @@ namespace Gifter.Controllers
         }
 
         [HttpGet("GetWithComments/{id}")]
-        public IActionResult GetByIdWithComments(int id)
+        public IActionResult GetWithComments(int id)
         {
             var post = _postRepository.GetByIdWithComments(id);
             if (post == null)

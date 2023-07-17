@@ -3,7 +3,7 @@ import { SearchPosts, getAllPosts } from "../APIManagers/PostManager";
 import { InputGroup, Button, Input } from "reactstrap";
 
 
-export const PostSearch = () => {
+const PostSearch = () => {
 
 const [query, setQuery] = useState("");
 const [posts, setPosts] = useState([]);
@@ -42,3 +42,5 @@ useEffect(() => {
         </div>
     )
 };
+
+export default PostSearch;
